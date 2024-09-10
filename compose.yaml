@@ -21,10 +21,14 @@ services:
     image: cat-pinterest-api
     build:
       context: ./api/
+    ports: 
+      - "3001:3001"    
     networks:
       - cat-pinterest-net
     environment:
       NODE_ENV: prod
+    env_file: 
+      - ./api/.env
     depends_on:
       cat-pinterest-api-pg:
         condition: service_healthy
@@ -43,11 +47,13 @@ services:
     container_name: cat-pinterest-api-pg
     image: postgres:14
     networks:
-      - cat-pinterest-net
+      - cat-pinterest-net  
     environment:
       POSTGRES_PASSWORD: 1
       POSTGRES_USER: postgres
       POSTGRES_DB: support_lk_db
+    ports: 
+      - "6501:5432"  
     #      PG_DATA: /var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
@@ -57,3 +63,5 @@ services:
 
 networks:
   cat-pinterest-net:
+    name: cat-pinterest-net
+    driver: bridge

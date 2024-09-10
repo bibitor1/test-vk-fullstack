@@ -1,0 +1,13 @@
+.moreCatsButton {
+    border-radius: 30px;
+    border: 0;
+    padding: 10px;
+    background: var(--primary-background);
+    color: var(--primary-text);
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.moreCatsButton:hover {
+    background: var(--primary-background-active);
+}
